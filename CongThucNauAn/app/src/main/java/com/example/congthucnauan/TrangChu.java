@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -21,8 +22,11 @@ import java.util.TimerTask;
 
 public class TrangChu extends Fragment {
     RecyclerView monAnNoiBat;
+    GridView gridViewChuyenMuc;
+    ChuyenMucAdapter chuyenMucAdapter;
     ImageView imgLogo;
     ArrayList<Integer> arrayHinh;
+    ArrayList<ChuyenMuc> chuyenMucArrayList;
     Timer timer;
     Handler handler;
 
@@ -37,13 +41,13 @@ public class TrangChu extends Fragment {
         monAnNoiBat.setLayoutManager(linearLayoutManager);
         final ArrayList<MonAn> monAnArrayList = new ArrayList<>();
 
-        for (int i = 0; i < DuLieu.imgHinh.length; i++) {
-            monAnArrayList.add(new MonAn(DuLieu.imgHinh[i], DuLieu.txtTenMonAn[i]));
+        for (int i = 0; i < DuLieuMonAn.imgHinh.length; i++) {
+            monAnArrayList.add(new MonAn(DuLieuMonAn.imgHinh[i], DuLieuMonAn.txtTenMonAn[i]));
         }
         MonAnAdapter monAnAdapter = new MonAnAdapter(monAnArrayList, view.getContext());
         monAnNoiBat.setAdapter(monAnAdapter);
         monAnNoiBat.setItemAnimator(new DefaultItemAnimator());
-
+        //Dat hinh logo
         imgLogo = (ImageView) view.findViewById(R.id.imgHinhDemo);
         timer = new Timer();
         Handler.Callback callback = new Handler.Callback() {
@@ -55,6 +59,15 @@ public class TrangChu extends Fragment {
         };
         handler = new Handler(callback);
         timer.schedule(new dHinh(), 2000, 2000);
+
+        //Girview
+        gridViewChuyenMuc = (GridView) view.findViewById(R.id.girdViewChuyenMuc);
+        chuyenMucArrayList = new ArrayList<>();
+        for (int i = 0; i < DuLieuChuyenMuc.imgHinhChuyenMuc.length; i++) {
+            chuyenMucArrayList.add(new ChuyenMuc(DuLieuChuyenMuc.imgHinhChuyenMuc[i], DuLieuChuyenMuc.txtTenChuyenMuc[i]));
+        }
+        chuyenMucAdapter = new ChuyenMucAdapter(view.getContext(),R.layout.chuyenmuc_layout,chuyenMucArrayList);
+        gridViewChuyenMuc.setAdapter(chuyenMucAdapter);
         return view;
     }
 

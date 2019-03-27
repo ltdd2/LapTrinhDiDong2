@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <android.support.v7.widget.CardView
-        android:layout_width="350dp"
+        android:layout_width="170dp"
         android:layout_height="160dp"
         app:cardCornerRadius="15dp">
         <FrameLayout
@@ -13,23 +13,23 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
-           <ImageView
-               android:id="@+id/imgHinh"
-               android:layout_width="350dp"
-               android:layout_height="160dp"
-               android:scaleType="fitXY"
-               android:src="@drawable/goicatre"
-               android:alpha="0.5"/>
+            <ImageView
+                android:id="@+id/imgHinhChuyenMuc"
+                android:layout_width="170dp"
+                android:layout_height="160dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/goicatre"
+                android:alpha="0.5"/>
             <TextView
                 android:layout_gravity="center"
-                android:id="@+id/txtTen"
+                android:id="@+id/txtTenChuyenMuc"
                 android:textSize="30sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="#f00"
                 android:layout_marginTop="10dp"
-                android:text="Gỏi Cá Trê"/>
+                android:text="Các Món Gỏi"/>
         </FrameLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

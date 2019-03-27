@@ -65,12 +65,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.trangchu:
                 fragment = new TrangChu();
                 toolbar.setTitle(R.string.trangchu);
-                Toast.makeText(this,"TrangChu",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Trang Chu",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.chitiet:
                fragment = new ChiTiet();
                 toolbar.setTitle(R.string.yeuthich);
-                Toast.makeText(this,"ChiTiet",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Chi Tiet",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.thoat:
                 System.exit(1);

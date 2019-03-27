@@ -1,10 +1,10 @@
 package com.example.congthucnauan;
 
-public class MonAn {
+public class ChuyenMuc {
     private int imgHinh;
     private String txtTen;
 
-    public MonAn(int imgHinh, String txtTen) {
+    public ChuyenMuc(int imgHinh, String txtTen) {
         this.imgHinh = imgHinh;
         this.txtTen = txtTen;
     }
