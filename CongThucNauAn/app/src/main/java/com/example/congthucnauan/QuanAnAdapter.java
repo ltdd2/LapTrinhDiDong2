@@ -2,7 +2,6 @@ package com.example.congthucnauan;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +52,9 @@ public class QuanAnAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context,ReviewQuanAnActivity.class);
+                intent.putExtra("Key",txtTenQuanAn.getText());
+                context.startActivity(intent);
             }
         });
         return convertView;
