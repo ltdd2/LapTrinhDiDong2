@@ -1,26 +1,37 @@
 package com.example.congthucnauan;
 
 public class MonAn {
-    private int imgHinh;
-    private String txtTen;
+    private int imgHinhMonAn;
+    private String txtTenMonAn;
+    private String txtMoTaMonAn;
 
-    public MonAn(int imgHinh, String txtTen) {
-        this.imgHinh = imgHinh;
-        this.txtTen = txtTen;
-    }
-    public int getImgHinh() {
-        return imgHinh;
-    }
-
-    public void setImgHinh(int imgHinh) {
-        this.imgHinh = imgHinh;
+    public MonAn(int imgHinhMonAn, String txtTenMonAn, String txtMoTaMonAn) {
+        this.imgHinhMonAn = imgHinhMonAn;
+        this.txtTenMonAn = txtTenMonAn;
+        this.txtMoTaMonAn = txtMoTaMonAn;
     }
 
-    public String getTxtTen() {
-        return txtTen;
+    public int getImgHinhMonAn() {
+        return imgHinhMonAn;
     }
 
-    public void setTxtTen(String txtTen) {
-        this.txtTen = txtTen;
+    public void setImgHinhMonAn(int imgHinhMonAn) {
+        this.imgHinhMonAn = imgHinhMonAn;
+    }
+
+    public String getTxtTenMonAn() {
+        return txtTenMonAn;
+    }
+
+    public void setTxtTenMonAn(String txtTenMonAn) {
+        this.txtTenMonAn = txtTenMonAn;
+    }
+
+    public String getTxtMoTaMonAn() {
+        return txtMoTaMonAn;
+    }
+
+    public void setTxtMoTaMonAn(String txtMoTaMonAn) {
+        this.txtMoTaMonAn = txtMoTaMonAn;
     }
 }

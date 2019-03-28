@@ -32,7 +32,7 @@
                    android:id="@+id/imgHinhDemo"
                    android:scaleType="fitXY"
                    android:layout_width="match_parent"
-                   android:layout_height="200dp"
+                   android:layout_height="100dp"
                    android:src="@drawable/goicatre"/>
 
                <TextView
@@ -45,8 +45,9 @@
                    android:textColor="#fff"/>
 
                <android.support.v7.widget.RecyclerView
-                   android:id="@+id/dsMonAnNoiBat"
-                   android:layout_marginTop="10dp"
+                   android:id="@+id/reDanhMuc"
+                   android:layout_marginTop="5dp"
+                   android:layout_marginBottom="5dp"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
                </android.support.v7.widget.RecyclerView>
@@ -58,11 +59,25 @@
                    android:background="#00AA00"
                    android:textSize="25sp"
                    android:textColor="#fff"/>
-               <GridView
-                   android:id="@+id/gv"
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/reMonAn"
                    android:numColumns="2"
                    android:layout_width="match_parent"
-                   android:layout_height="320dp">
+                   android:layout_height="wrap_content">
+               </android.support.v7.widget.RecyclerView>
+               <TextView
+                   android:gravity="center"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="QUÁN ĂN NGON NHẤT"
+                   android:background="#00AA00"
+                   android:textSize="25sp"
+                   android:textColor="#fff"/>
+               <GridView
+                   android:id="@+id/gvQuanAn"
+                   android:numColumns="2"
+                   android:layout_width="match_parent"
+                   android:layout_height="210dp">
 
                </GridView>
                <TextView

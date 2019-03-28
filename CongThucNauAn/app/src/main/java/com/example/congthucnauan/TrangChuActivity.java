@@ -30,12 +30,16 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
-    RecyclerView monAnNoiBat;
-    GridView gridViewChuyenMuc;
+    RecyclerView reDanhMuc,reMonAn;
+    GridView gvQuanAn;
     ChuyenMucAdapter chuyenMucAdapter;
+    MonAnAdapter monAnAdapter;
+    QuanAnAdapter  quanAnAdapter;
     ImageView imgLogo;
     ArrayList<Integer> arrayHinh;
-    ArrayList<ChuyenMuc> chuyenMucArrayList;
+    ArrayList<ChuyenMuc> chuyenMucs;
+    ArrayList<QuanAn> quanAns;
+    ArrayList<MonAn> monAns;
     Timer timer;
     Handler handler;
     @Override
@@ -55,19 +59,31 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Recyclerview
-        monAnNoiBat = (RecyclerView) findViewById(R.id.dsMonAnNoiBat);
-        monAnNoiBat.setHasFixedSize(true);
+        //Recyclerview danh muc mon an
+        reDanhMuc = (RecyclerView) findViewById(R.id.reDanhMuc);
+        reDanhMuc.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        monAnNoiBat.setLayoutManager(linearLayoutManager);
-        final ArrayList<MonAn> monAnArrayList = new ArrayList<>();
+        reDanhMuc.setLayoutManager(linearLayoutManager);
+        chuyenMucs = new ArrayList<>();
 
-        for (int i = 0; i < DuLieuMonAn.imgHinh.length; i++) {
-            monAnArrayList.add(new MonAn(DuLieuMonAn.imgHinh[i], DuLieuMonAn.txtTenMonAn[i]));
+        for (int i = 0; i < DuLieuChuyenMuc.imgHinhChuyenMuc.length; i++) {
+            chuyenMucs.add(new ChuyenMuc(DuLieuChuyenMuc.imgHinhChuyenMuc[i], DuLieuChuyenMuc.txtTenChuyenMuc[i]));
         }
-        MonAnAdapter monAnAdapter = new MonAnAdapter(monAnArrayList, this);
-        monAnNoiBat.setAdapter(monAnAdapter);
-        monAnNoiBat.setItemAnimator(new DefaultItemAnimator());
+         chuyenMucAdapter = new ChuyenMucAdapter(chuyenMucs,this);
+        reDanhMuc.setAdapter(chuyenMucAdapter);
+        reDanhMuc.setItemAnimator(new DefaultItemAnimator());
+        //Recyclerview  mon an
+        reMonAn = (RecyclerView) findViewById(R.id.reMonAn);
+        reMonAn.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        reMonAn.setLayoutManager(linearLayoutManager1);
+        monAns = new ArrayList<>();
+        for(int i = 0 ; i< 3 ;i++){
+            monAns.add(new MonAn(DuLieuMonAn.imgHinh[i],DuLieuMonAn.txtTenMonAn[i],DuLieuMonAn.txtMoTaMonAn[i]));
+        }
+        monAnAdapter = new MonAnAdapter(monAns,this);
+        reMonAn.setAdapter(monAnAdapter);
+        reMonAn.setItemAnimator(new DefaultItemAnimator());
         //Dat hinh logo
         imgLogo = (ImageView) findViewById(R.id.imgHinhDemo);
         timer = new Timer();
@@ -80,29 +96,15 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
         };
         handler = new Handler(callback);
         timer.schedule(new dHinh(), 2000, 2000);
-
-        //Girview
-        gridViewChuyenMuc = (GridView) findViewById(R.id.gv);
-        chuyenMucArrayList = new ArrayList<>();
-        for (int i = 0; i < DuLieuChuyenMuc.imgHinhChuyenMuc.length; i++) {
-            chuyenMucArrayList.add(new ChuyenMuc(DuLieuChuyenMuc.imgHinhChuyenMuc[i], DuLieuChuyenMuc.txtTenChuyenMuc[i]));
+        //Girview Quan  An
+        gvQuanAn = (GridView) findViewById(R.id.gvQuanAn);
+        quanAns = new ArrayList<>();
+        for(int i = 0; i < DuLieuQuanAn.imgHinhQuanAn.length;i++){
+            quanAns.add(new QuanAn(DuLieuQuanAn.imgHinhQuanAn[i],DuLieuQuanAn.txtTenQuanAn[i]));
         }
-        chuyenMucAdapter = new ChuyenMucAdapter(this,R.layout.chuyenmuc_layout,chuyenMucArrayList);
-        gridViewChuyenMuc.setAdapter(chuyenMucAdapter);
-      /* // chuyenMucAdapter = new ChuyenMucAdapter(view.getContext(),R.layout.chuyenmuc_layout,chuyenMucArrayList);
-        gridViewChuyenMuc.setAdapter(chuyenMucAdapter);
-        reDanhMuc = (RecyclerView) view.findViewById(R.id.reDanhMuc);
-        reDanhMuc.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        reDanhMuc.setLayoutManager(linearLayoutManager1);
-        final ArrayList<ChuyenMuc> chuyenMucs = new ArrayList<>();
+        quanAnAdapter = new QuanAnAdapter(quanAns,this,R.layout.item_quan_an_layout);
+        gvQuanAn.setAdapter(quanAnAdapter);
 
-        for(int i = 0; i < DuLieuChuyenMuc.imgHinhChuyenMuc.length;i++){
-            chuyenMucs.add(new ChuyenMuc(DuLieuChuyenMuc.imgHinhChuyenMuc[i],DuLieuChuyenMuc.txtTenChuyenMuc[i]));
-        }
-        MonAnAdapter monAnAdapter1 = new MonAnAdapter(monAnArrayList, view.getContext());
-        reDanhMuc.setAdapter(monAnAdapter1);
-        reDanhMuc.setItemAnimator(new DefaultItemAnimator());*/
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -122,16 +124,26 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.monkhaivi:
-                Toast.makeText(this,"Trang Chu",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent.putExtra("Key","MÓN KHAI VỊ");
+                startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.monnuong:
-                Toast.makeText(this,"Chi Tiet",Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent1.putExtra("Key","MÓN NƯỚNG");
+                startActivity(intent1);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.monlau:
+                Intent intent2 = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent2.putExtra("Key","MÓN LẨU");
+                startActivity(intent2);
                 break;
-            case R.id.diadiem:
+            case R.id.dsQuanAn:
+                Intent intent3 = new Intent(TrangChuActivity.this,QuanAnActivity.class);
+                intent3.putExtra("Key","DANH SÁCH QUÁN  ĂN");
+                startActivity(intent3);
                 break;
             case R.id.thoat:
                 break;
@@ -139,6 +151,9 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
 
         return true;
     }
+
+
+    //Timer
     class dHinh extends TimerTask {
 
         @Override
@@ -146,7 +161,7 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
             handler.sendEmptyMessage(0);
         }
     }
-
+    //Đổi hình
     private void doiHinh() {
         arrayHinh = new ArrayList<>();
         arrayHinh.add(R.drawable.goicatre);

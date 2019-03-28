@@ -1,0 +1,52 @@
+package com.example.congthucnauan;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+
+import java.util.ArrayList;
+
+public class DanhSachMonAnActivity extends AppCompatActivity {
+    Toolbar toolbarDSMonAn;
+    MonAnAdapter monAnAdapter;
+    ArrayList<MonAn> monAns;
+    RecyclerView reDSMonAn;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.danh_sach_mon_an_layout);
+        //Toolbar
+        toolbarDSMonAn = (Toolbar) findViewById(R.id.toolbarDSMonAn);
+        Intent intent = getIntent();
+        String monan = intent.getStringExtra("Key");
+        toolbarDSMonAn.setTitle(monan);
+        setSupportActionBar(toolbarDSMonAn);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarDSMonAn.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        //Nội Dung
+        reDSMonAn =  (RecyclerView) findViewById(R.id.reDSMonAn);
+        reDSMonAn.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        reDSMonAn.setLayoutManager(linearLayoutManager);
+        monAns = new ArrayList<>();
+
+        for (int i = 0; i < DuLieuChuyenMuc.imgHinhChuyenMuc.length; i++) {
+            monAns.add(new MonAn(DuLieuMonAn.imgHinh[i], DuLieuMonAn.txtTenMonAn[i],DuLieuMonAn.txtMoTaMonAn[i]));
+        }
+        monAnAdapter = new MonAnAdapter(monAns,this);
+        reDSMonAn.setAdapter(monAnAdapter);
+        reDSMonAn.setItemAnimator(new DefaultItemAnimator());
+    }
+}

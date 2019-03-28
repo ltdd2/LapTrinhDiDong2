@@ -1,61 +1,60 @@
 package com.example.congthucnauan;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class ChuyenMucAdapter extends BaseAdapter {
-    private Context context;
-    private int layout;
-    private List<ChuyenMuc> chuyenMucList;
+public class ChuyenMucAdapter extends RecyclerView.Adapter<ChuyenMucAdapter.ViewHolder> {
+    ArrayList<ChuyenMuc> chuyenMucs;
+    Context context;
 
-    public ChuyenMucAdapter(Context context, int layout, List<ChuyenMuc> chuyenMucList) {
+    public ChuyenMucAdapter(ArrayList<ChuyenMuc> chuyenMucs, Context context) {
+        this.chuyenMucs = chuyenMucs;
         this.context = context;
-        this.layout = layout;
-        this.chuyenMucList = chuyenMucList;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
+        View view = layoutInflater.inflate(R.layout.chuyen_muc_layout,viewGroup, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public int getCount() {
-        return chuyenMucList.size();
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        viewHolder.imgHinhChuyenMuc.setImageResource(chuyenMucs.get(i).getImgHinh());
+        viewHolder.txtTenChuyenMuc.setText(chuyenMucs.get(i).getTxtTen());
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public int getItemCount() {
+        return chuyenMucs.size();
     }
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder;
-            if(convertView == null){
-                viewHolder = new ViewHolder();
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(layout,null);
-                viewHolder.imgHinh = (ImageView) convertView.findViewById(R.id.imgHinhChuyenMuc);
-                viewHolder.txtTenChuyenMuc = (TextView) convertView.findViewById(R.id.txtTenChuyenMuc);
-                convertView.setTag(viewHolder);
-            }else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
-            ChuyenMuc chuyenMuc = chuyenMucList.get(position);
-            viewHolder.imgHinh.setImageResource(chuyenMuc.getImgHinh());
-            viewHolder.txtTenChuyenMuc.setText(chuyenMuc.getTxtTen());
-        return convertView;
-    }
-    private class ViewHolder{
-        ImageView imgHinh;
+    public class ViewHolder  extends  RecyclerView.ViewHolder{
+        ImageView imgHinhChuyenMuc;
         TextView txtTenChuyenMuc;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imgHinhChuyenMuc = itemView.findViewById(R.id.imgHinhChuyenMuc);
+            txtTenChuyenMuc = itemView.findViewById(R.id.txtTenChuyenMuc);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,DanhSachMonAnActivity.class);
+                    intent.putExtra("Key",txtTenChuyenMuc.getText());
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 }
