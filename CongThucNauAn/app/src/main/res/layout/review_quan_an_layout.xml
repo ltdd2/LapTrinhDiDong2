@@ -13,5 +13,4 @@
         android:background="#0033FF"
         app:titleTextColor="#fff">
     </android.support.v7.widget.Toolbar>
-
 </LinearLayout>

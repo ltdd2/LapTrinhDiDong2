@@ -14,11 +14,11 @@
         android:background="#0033FF"
         app:titleTextColor="#fff">
     </android.support.v7.widget.Toolbar>
-    <GridView
-        android:id="@+id/gvDSQuanAn"
-        android:numColumns="2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </GridView>
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/reQuanAn"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+   </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

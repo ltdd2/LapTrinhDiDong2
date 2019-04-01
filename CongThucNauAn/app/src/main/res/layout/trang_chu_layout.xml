@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@drawable/bg"
     android:id="@+id/draw_layout"
     tools:context=".TrangChuActivity"
     tools:openDrawer="start">
@@ -16,7 +17,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="#0033FF"
             app:titleTextColor="#fff">
         </android.support.v7.widget.Toolbar>
@@ -32,7 +33,7 @@
                    android:id="@+id/imgHinhDemo"
                    android:scaleType="fitXY"
                    android:layout_width="match_parent"
-                   android:layout_height="100dp"
+                   android:layout_height="150dp"
                    android:src="@drawable/goicatre"/>
 
                <TextView
@@ -43,25 +44,86 @@
                    android:background="#00AA00"
                    android:textSize="25sp"
                    android:textColor="#fff"/>
-
-               <android.support.v7.widget.RecyclerView
-                   android:id="@+id/reDanhMuc"
-                   android:layout_marginTop="5dp"
-                   android:layout_marginBottom="5dp"
+               <LinearLayout
+                   android:orientation="vertical"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
-               </android.support.v7.widget.RecyclerView>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="center"
+                       android:orientation="horizontal">
+                       <Button
+                           android:id="@+id/btnTrangMieng"
+                           android:layout_width="80dp"
+                           android:layout_height="80dp"
+                           android:textSize="10sp"
+                           android:background="@drawable/custom_button_1"
+                           android:text="MÓN TRÁNG MIỆNG"/>
+                       <Button
+                           android:id="@+id/btnMonXao"
+                           android:layout_width="80dp"
+                           android:layout_height="80dp"
+                           android:textSize="10sp"
+                           android:layout_marginTop="10dp"
+                           android:layout_marginBottom="10dp"
+                           android:layout_marginLeft="30dp"
+                           android:layout_marginRight="30dp"
+                           android:background="@drawable/custom_button_2"
+                           android:text="MÓN XÀO"/>
+                       <Button
+                           android:id="@+id/btnMonLau"
+                           android:layout_width="80dp"
+                           android:layout_height="80dp"
+                           android:textSize="10sp"
+                           android:background="@drawable/custom_button_3"
+                           android:text="MÓN LẨU"/>
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="center"
+                       android:orientation="horizontal">
+                       <Button
+                           android:id="@+id/btnMonKho"
+                           android:layout_width="80dp"
+                           android:layout_height="80dp"
+                           android:textSize="10sp"
+                           android:layout_marginTop="10dp"
+                           android:layout_marginBottom="10dp"
+                           android:background="@drawable/custom_button_4"
+                           android:text="MÓN KHO "/>
+                       <Button
+                           android:id="@+id/btnMonChien"
+                           android:layout_width="80dp"
+                           android:layout_height="80dp"
+                           android:textSize="10sp"
+                           android:layout_marginLeft="30dp"
+                           android:layout_marginRight="30dp"
+                           android:background="@drawable/custom_button_5"
+                           android:text="MÓN CHIÊN"/>
+                       <Button
+                           android:id="@+id/btnQuanAn"
+                           android:layout_width="80dp"
+                           android:layout_height="80dp"
+                           android:textSize="10sp"
+                           android:background="@drawable/custom_button_6"
+                           android:text="QUÁN ĂN     NGON"/>
+                   </LinearLayout>
+
+               </LinearLayout>
+
+
                <TextView
                    android:gravity="center"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="MÓN ĂN MỚI NHẤT"
+                   android:text="MÓN ĂN MỚI CẬP NHẬT"
                    android:background="#00AA00"
                    android:textSize="25sp"
                    android:textColor="#fff"/>
                <android.support.v7.widget.RecyclerView
                    android:id="@+id/reMonAn"
-                   android:numColumns="2"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">
                </android.support.v7.widget.RecyclerView>
@@ -69,26 +131,24 @@
                    android:gravity="center"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="QUÁN ĂN NGON NHẤT"
+                   android:text="QUÁN ĂN NGON"
                    android:background="#00AA00"
                    android:textSize="25sp"
                    android:textColor="#fff"/>
-               <GridView
-                   android:id="@+id/gvQuanAn"
-                   android:numColumns="2"
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/reQuanAn"
                    android:layout_width="match_parent"
-                   android:layout_height="210dp">
-
-               </GridView>
+                   android:layout_height="wrap_content">
+               </android.support.v7.widget.RecyclerView>
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:text="Chúc Bạn Thành Công"
                    android:gravity="center"
-                   android:textColor="@color/colorAccent"
-                   android:background="@color/colorPrimary"/>
+                   android:textSize="30sp"
+                   android:textColor="#fff"
+                   android:background="#00AA00"/>
            </LinearLayout>
-
 
        </ScrollView>
 

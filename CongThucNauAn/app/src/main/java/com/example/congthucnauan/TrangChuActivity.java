@@ -17,6 +17,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,18 +32,14 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
-    RecyclerView reDanhMuc,reMonAn;
-    GridView gvQuanAn;
-    ChuyenMucAdapter chuyenMucAdapter;
+    RecyclerView reMonAn,reQuanAn;
     MonAnAdapter monAnAdapter;
     QuanAnAdapter  quanAnAdapter;
     ImageView imgLogo;
-    ArrayList<Integer> arrayHinh;
-    ArrayList<ChuyenMuc> chuyenMucs;
     ArrayList<QuanAn> quanAns;
     ArrayList<MonAn> monAns;
-    Timer timer;
-    Handler handler;
+
+    Button btnMonXao,btnMonLau,btnTrangMieng,btnQuanAn,btnMonChien,btnMonKho;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,28 +48,21 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.trangchu);
-
         drawerLayout = (DrawerLayout) findViewById(R.id.draw_layout);
         NavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
+        //Button
+        btnMonXao = (Button) findViewById(R.id.btnMonXao);
+        btnMonLau =(Button) findViewById(R.id.btnMonLau);
+        btnTrangMieng =(Button) findViewById(R.id.btnTrangMieng);
+        btnQuanAn =(Button) findViewById(R.id.btnQuanAn);
+        btnMonChien =(Button)findViewById(R.id.btnMonChien);
+        btnMonKho=(Button) findViewById(R.id.btnMonKho);
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Recyclerview danh muc mon an
-        reDanhMuc = (RecyclerView) findViewById(R.id.reDanhMuc);
-        reDanhMuc.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        reDanhMuc.setLayoutManager(linearLayoutManager);
-        chuyenMucs = new ArrayList<>();
-
-        for (int i = 0; i < DuLieuChuyenMuc.imgHinhChuyenMuc.length; i++) {
-            chuyenMucs.add(new ChuyenMuc(DuLieuChuyenMuc.imgHinhChuyenMuc[i], DuLieuChuyenMuc.txtTenChuyenMuc[i]));
-        }
-         chuyenMucAdapter = new ChuyenMucAdapter(chuyenMucs,this);
-        reDanhMuc.setAdapter(chuyenMucAdapter);
-        reDanhMuc.setItemAnimator(new DefaultItemAnimator());
         //Recyclerview  mon an
         reMonAn = (RecyclerView) findViewById(R.id.reMonAn);
         reMonAn.setHasFixedSize(true);
@@ -84,26 +75,68 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
         monAnAdapter = new MonAnAdapter(monAns,this);
         reMonAn.setAdapter(monAnAdapter);
         reMonAn.setItemAnimator(new DefaultItemAnimator());
-        //Dat hinh logo
-        imgLogo = (ImageView) findViewById(R.id.imgHinhDemo);
-        timer = new Timer();
-        Handler.Callback callback = new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                doiHinh();
-                return false;
-            }
-        };
-        handler = new Handler(callback);
-        timer.schedule(new dHinh(), 2000, 2000);
         //Girview Quan  An
-        gvQuanAn = (GridView) findViewById(R.id.gvQuanAn);
+        reQuanAn = (RecyclerView) findViewById(R.id.reQuanAn);
+        reQuanAn.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        reQuanAn.setLayoutManager(linearLayoutManager2);
         quanAns = new ArrayList<>();
-        for(int i = 0; i < DuLieuQuanAn.imgHinhQuanAn.length;i++){
+        for(int i = 0; i < 3;i++){
             quanAns.add(new QuanAn(DuLieuQuanAn.imgHinhQuanAn[i],DuLieuQuanAn.txtTenQuanAn[i]));
         }
-        quanAnAdapter = new QuanAnAdapter(quanAns,this,R.layout.item_quan_an_layout);
-        gvQuanAn.setAdapter(quanAnAdapter);
+        quanAnAdapter = new QuanAnAdapter(quanAns,this);
+        reQuanAn.setAdapter(quanAnAdapter);
+        reQuanAn.setItemAnimator(new DefaultItemAnimator());
+
+        //Sự kiện click
+        btnTrangMieng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent.putExtra("Key","Món Tráng Miệng");
+                startActivity(intent);
+            }
+        });
+        btnMonChien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent.putExtra("Key","Món Chiên");
+                startActivity(intent);
+            }
+        });
+        btnMonKho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent.putExtra("Key","Món Kho");
+                startActivity(intent);
+            }
+        });
+        btnMonLau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent.putExtra("Key","Món Lẩu");
+                startActivity(intent);
+            }
+        });
+        btnMonXao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent.putExtra("Key","Món Xào");
+                startActivity(intent);
+            }
+        });
+        btnQuanAn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrangChuActivity.this,QuanAnActivity.class);
+                intent.putExtra("Key","DANH SÁCH QUÁN ĂN");
+                startActivity(intent);
+            }
+        });
 
     }
     @Override
@@ -111,7 +144,6 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
         if(actionBarDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
-
         return onOptionsItemSelected(item);
     }
 
@@ -123,54 +155,48 @@ public class TrangChuActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
-            case R.id.monkhaivi:
+            case R.id.montrangmieng:
                 Intent intent = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
-                intent.putExtra("Key","MÓN KHAI VỊ");
+                intent.putExtra("Key","Món Tráng Miệng");
                 startActivity(intent);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
-            case R.id.monnuong:
+            case R.id.monxao:
                 Intent intent1 = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
-                intent1.putExtra("Key","MÓN NƯỚNG");
+                intent1.putExtra("Key","Món Xào");
                 startActivity(intent1);
+
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.monlau:
                 Intent intent2 = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
-                intent2.putExtra("Key","MÓN LẨU");
+                intent2.putExtra("Key","Món Lẩu");
                 startActivity(intent2);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
-            case R.id.dsQuanAn:
-                Intent intent3 = new Intent(TrangChuActivity.this,QuanAnActivity.class);
-                intent3.putExtra("Key","DANH SÁCH QUÁN  ĂN");
+            case R.id.monkho:
+                Intent intent3 = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent3.putExtra("Key","Món Kho");
                 startActivity(intent3);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.monchien:
+                Intent intent4 = new Intent(TrangChuActivity.this,DanhSachMonAnActivity.class);
+                intent4.putExtra("Key","Món Chiên");
+                startActivity(intent4);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.quanan:
+                Intent intent5 = new Intent(TrangChuActivity.this,QuanAnActivity.class);
+                intent5.putExtra("Key","DANH SÁCH QUÁN ĂN");
+                startActivity(intent5);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.thoat:
+                finish();
                 break;
         }
 
         return true;
-    }
-
-
-    //Timer
-    class dHinh extends TimerTask {
-
-        @Override
-        public void run() {
-            handler.sendEmptyMessage(0);
-        }
-    }
-    //Đổi hình
-    private void doiHinh() {
-        arrayHinh = new ArrayList<>();
-        arrayHinh.add(R.drawable.goicatre);
-        arrayHinh.add(R.drawable.goimuc);
-        arrayHinh.add(R.drawable.goioc);
-        arrayHinh.add(R.drawable.goitom);
-        arrayHinh.add(R.drawable.rauxanh);
-        Random random = new Random();
-        int i = random.nextInt(arrayHinh.size());
-        imgLogo.setImageResource(arrayHinh.get(i));
     }
 }
