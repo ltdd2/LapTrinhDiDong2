@@ -5,7 +5,6 @@ public class QuanAn {
     private String txtTenQuanAn;
 
     public QuanAn(int imgHinhQuanAn, String txtTenQuanAn) {
-
         this.imgHinhQuanAn = imgHinhQuanAn;
         this.txtTenQuanAn = txtTenQuanAn;
     }
