@@ -5,4 +5,6 @@
         android:height="80dp"/>
     <corners android:radius="50dp"/>
     <solid android:color="#9900FF"/>
+    <stroke android:width="2dp"
+        android:color="#ff00"/>
 </shape>

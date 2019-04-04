@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -16,8 +17,6 @@ public class DanhSachMonAnActivity extends AppCompatActivity {
     MonAnAdapter monAnAdapter;
     ArrayList<MonAn> monAns;
     RecyclerView reDSMonAn;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +41,16 @@ public class DanhSachMonAnActivity extends AppCompatActivity {
         reDSMonAn.setLayoutManager(linearLayoutManager);
         monAns = new ArrayList<>();
 
-        for (int i = 0; i < DuLieuChuyenMuc.imgHinhChuyenMuc.length; i++) {
+        for (int i = 0; i < DuLieuMonAn.imgHinh.length; i++) {
             monAns.add(new MonAn(DuLieuMonAn.imgHinh[i], DuLieuMonAn.txtTenMonAn[i],DuLieuMonAn.txtMoTaMonAn[i]));
         }
         monAnAdapter = new MonAnAdapter(monAns,this);
         reDSMonAn.setAdapter(monAnAdapter);
         reDSMonAn.setItemAnimator(new DefaultItemAnimator());
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

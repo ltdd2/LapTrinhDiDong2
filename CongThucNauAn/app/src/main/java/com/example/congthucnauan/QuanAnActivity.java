@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.GridView;
 
@@ -16,7 +17,7 @@ public class QuanAnActivity extends AppCompatActivity {
     Toolbar toolbarQuanAn;
     ArrayList<QuanAn> quanAns;
     QuanAnAdapter quanAnAdapter;
-    RecyclerView reQuanAn;
+    GridView gvQuanAn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +37,17 @@ public class QuanAnActivity extends AppCompatActivity {
             }
         });
         //Nội Dung
-        reQuanAn = (RecyclerView) findViewById(R.id.reQuanAn);
-        reQuanAn.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        reQuanAn.setLayoutManager(linearLayoutManager2);
+        gvQuanAn = (GridView) findViewById(R.id.gvQuanAn);
         quanAns = new ArrayList<>();
-        for(int i = 0; i < 3;i++){
+        for(int i = 0; i <DuLieuQuanAn.imgHinhQuanAn.length;i++){
             quanAns.add(new QuanAn(DuLieuQuanAn.imgHinhQuanAn[i],DuLieuQuanAn.txtTenQuanAn[i]));
         }
         quanAnAdapter = new QuanAnAdapter(quanAns,this);
-        reQuanAn.setAdapter(quanAnAdapter);
-        reQuanAn.setItemAnimator(new DefaultItemAnimator());
+        gvQuanAn.setAdapter(quanAnAdapter);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

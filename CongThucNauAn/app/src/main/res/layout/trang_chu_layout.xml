@@ -34,8 +34,8 @@
                    android:scaleType="fitXY"
                    android:layout_width="match_parent"
                    android:layout_height="150dp"
-                   android:src="@drawable/goicatre"/>
 
+                   android:src="@drawable/chuyenhinh"/>
                <TextView
                    android:gravity="center"
                    android:layout_width="match_parent"
@@ -44,6 +44,7 @@
                    android:background="#00AA00"
                    android:textSize="25sp"
                    android:textColor="#fff"/>
+
                <LinearLayout
                    android:orientation="vertical"
                    android:layout_width="match_parent"
@@ -108,20 +109,40 @@
                            android:layout_height="80dp"
                            android:textSize="10sp"
                            android:background="@drawable/custom_button_6"
-                           android:text="QUÁN ĂN     NGON"/>
+                           android:text="QUÁN ĂN"/>
                    </LinearLayout>
 
                </LinearLayout>
 
 
-               <TextView
-                   android:gravity="center"
+               <LinearLayout
+                   android:orientation="horizontal"
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:text="MÓN ĂN MỚI CẬP NHẬT"
                    android:background="#00AA00"
-                   android:textSize="25sp"
-                   android:textColor="#fff"/>
+                   android:layout_height="wrap_content">
+                   <ImageView
+                       android:id="@+id/imgNew1"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:src="@drawable/chuyennew"
+                       android:scaleType="fitXY"/>
+                   <TextView
+                       android:gravity="center"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="8"
+                       android:text="MÓN ĂN MỚI CẬP NHẬT"
+                       android:textSize="20sp"
+                       android:textColor="#fff" />
+                   <ImageView
+                       android:id="@+id/imgNew2"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:src="@drawable/chuyennew"
+                       android:scaleType="fitXY"/>
+               </LinearLayout>
                <android.support.v7.widget.RecyclerView
                    android:id="@+id/reMonAn"
                    android:layout_width="match_parent"
@@ -131,15 +152,18 @@
                    android:gravity="center"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="QUÁN ĂN NGON"
+                   android:text="DANH SÁCH QUÁN ĂN"
                    android:background="#00AA00"
                    android:textSize="25sp"
                    android:textColor="#fff"/>
-               <android.support.v7.widget.RecyclerView
-                   android:id="@+id/reQuanAn"
+               <GridView
+                   android:horizontalSpacing="3dp"
+                   android:verticalSpacing="3dp"
+                   android:id="@+id/gvQuanAn"
+                   android:numColumns="2"
                    android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-               </android.support.v7.widget.RecyclerView>
+                   android:layout_height="match_parent">
+               </GridView>
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"

@@ -8,10 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> {
     ArrayList<MonAn> monAns;
@@ -44,12 +48,12 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> 
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgHinhMonAn;
+        CircleImageView imgHinhMonAn;
         TextView txtTenMonAn, txtMoTaMonAn;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
-            imgHinhMonAn = (ImageView) itemView.findViewById(R.id.imgHinhMonAn);
+            imgHinhMonAn = (CircleImageView) itemView.findViewById(R.id.imgHinhMonAn);
             txtMoTaMonAn = (TextView) itemView.findViewById(R.id.txtMoTaMonAn);
             txtTenMonAn = (TextView) itemView.findViewById(R.id.txtTenMonAn);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +64,8 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> 
                     context.startActivity(intent);
                 }
             });
+            Animation animation = AnimationUtils.loadAnimation(context,R.anim.recyclerview_anim);
+            itemView.startAnimation(animation);
         }
 
     }
